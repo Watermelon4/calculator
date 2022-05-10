@@ -1,5 +1,23 @@
+const main = document.querySelector("main")
+const calculator = main.querySelector(".calculator")
+const display = calculator.querySelector(".display")
+const currentOperationDisplay = display.querySelector("#current-operation")
+const currentResultDisplay = display.querySelector("#current-result")
+const controls = calculator.querySelector(".controls")
+const complete = controls.querySelector(".complete")
+const equals = complete.querySelector("#equals")
+const clear = complete.querySelector("#clear")
+const inputs = controls.querySelector(".inputs")
+const grid = inputs.querySelector(".grid")
+let gridButtons = grid.querySelectorAll("button")
+const deleteButton = gridInputs.pop()
+const gridOperators = inputs.querySelector(".grid-operators")
+const gridOperatorsButtons = gridOperators.querySelectorAll("button")
+
+
+
 let currentOperation = [];
-let currentSum = 0;
+let currentResult = 0;
 
 function add(a, b) {
 	return a + b;
