@@ -1,0 +1,81 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.calculator {
+  background-color: lightgray;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  width: 300px
+}
+
+.display {
+  background-color: white;
+  border: 1px solid darkgray;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.display #current-result {
+  margin-top: 4px;
+  text-align: right;
+  font-size: large;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+}
+
+.controls .complete {
+  margin: 10px 0px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.controls .complete button {
+  width: 128px;
+  height: 64px;
+  font-size: large;
+}
+
+.controls .complete #equals {
+  background-color: cornflowerblue;
+}
+
+.controls .complete #clear {
+  background-color: orange;
+}
+
+.controls .small {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.controls .small .inputs {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.controls .small .operators {
+  margin-left: 20px;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.controls .small button {
+  width: 64px;
+  height: 64px;
+  background-color: white;
+}
+
+.controls .small #delete {
+  background-color: orange;
+}
