@@ -15,9 +15,11 @@ const gridOperators = inputs.querySelector(".grid-operators")
 const gridOperatorsButtons = gridOperators.querySelectorAll("button")
 
 
-
 let currentOperation = [];
+let currentOperationString = "";
 let currentResult = 0;
+const SYNTAXERROR = "Syntax Error";
+const ZEROERROR = "Divide by zero error";
 
 function add(a, b) {
 	return a + b;
