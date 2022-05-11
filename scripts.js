@@ -14,12 +14,25 @@ const deleteButton = gridInputs.pop()
 const gridOperators = inputs.querySelector(".grid-operators")
 const gridOperatorsButtons = gridOperators.querySelectorAll("button")
 
-
-let currentOperation = [];
-let currentOperationString = "";
+let currentNumber = [];
+let currentOperation = "";
 let currentResult = 0;
+let currentExpression = [];
 const SYNTAXERROR = "Syntax Error";
 const ZEROERROR = "Divide by zero error";
+
+equals.addEventListener("click", operate)
+clear.addEventListener("click", clearOperation);
+deleteButton.addEventListener("click", removeFromOperation);
+
+// gridButtons.forEach(function(button) {
+// 	button.addEventListener("click", addToExpresson)
+// })
+
+// for each button, when clicked add the button's text content to the current operation
+// then check if the oplength is 3
+// if oplength == 3 operate on next click
+// else do nothing
 
 function add(a, b) {
 	return a + b;
@@ -75,11 +88,36 @@ function clearOperation() {
 	// return [];
 }
 
-function removeFromOperation() {
-	// currentOperation.pop
+function removeNumberFromExpression() {
+	currentNumber.pop();
+	if (currentNumber.length != 0) {
+		updateDisplay()
+	}
+	else {
+		currentExpression.pop()
+		updateDisplay()
+	}
 }
 
-function addToOperation() {
+function addNumberToExpression() {
+	// will accept operators as well but will result in syntax error
+	currentNumber.append(button.textContent);
+	updateDisplay();
+}
+
+function removeOperationFromExpression() {
+	currentExpression.pop();
+	updateDisplay();
+}
+
+function addOperationToExpression() {
+	currentExpression.append(currentNumber);
+	currentExpression.append(button.textContent);
+	updateDisplay();
 	// currentOperation.append();
 }
 
+function addNumberToExpression() {
+	currentExpression.append(currentNumber.toString());
+	updateDisplay();
+}
