@@ -51,31 +51,30 @@ main {
   background-color: orange;
 }
 
-.controls .small {
+.controls .inputs {
   display: flex;
   justify-content: space-between;
-
 }
 
-.controls .small .inputs {
+.controls .inputs .grid {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
 
-.controls .small .operators {
+.controls .inputs .grid-operators {
   margin-left: 20px;
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
 }
 
-.controls .small button {
+.controls .inputs button {
   width: 64px;
   height: 64px;
   background-color: white;
 }
 
-.controls .small #delete {
+.controls .inputs #delete {
   background-color: orange;
 }
