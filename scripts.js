@@ -1,7 +1,7 @@
 const main = document.querySelector("main")
 const calculator = main.querySelector(".calculator")
 const display = calculator.querySelector(".display")
-const currentOperationDisplay = display.querySelector("#current-operation")
+const currentExpressionDisplay = display.querySelector("#current-operation")
 const currentResultDisplay = display.querySelector("#current-result")
 const controls = calculator.querySelector(".controls")
 const complete = controls.querySelector(".complete")
@@ -10,11 +10,11 @@ const clear = complete.querySelector("#clear")
 const inputs = controls.querySelector(".inputs")
 const grid = inputs.querySelector(".grid")
 let gridButtons = grid.querySelectorAll("button")
-const deleteButton = gridInputs.pop()
+const deleteButton = grid.querySelector("#delete")
 const gridOperators = inputs.querySelector(".grid-operators")
 const gridOperatorsButtons = gridOperators.querySelectorAll("button")
 
-let currentNumber = [];
+let currentNumber = "";
 let currentOperation = "";
 let currentResult = 0;
 let currentExpression = [];
@@ -23,11 +23,22 @@ const ZEROERROR = "Divide by zero error";
 
 equals.addEventListener("click", operate)
 clear.addEventListener("click", clearOperation);
-deleteButton.addEventListener("click", removeFromOperation);
+// deleteButton.addEventListener("click", );
 
-// gridButtons.forEach(function(button) {
-// 	button.addEventListener("click", addToExpresson)
-// })
+gridButtons.forEach(function(button) {
+	button.addEventListener("click", addInputToCurrentNum)
+	})
+
+// add input to currentNum
+function addInputToCurrentNum() {
+	currentNumber += this.textContent
+	currentExpression = `${currentNumber}`;
+	updateExpressionDisplay()
+}
+
+function updateExpressionDisplay() {
+	currentExpressionDisplay.textContent = currentExpression
+}
 
 // for each button, when clicked add the button's text content to the current operation
 // then check if the oplength is 3
@@ -88,36 +99,51 @@ function clearOperation() {
 	// return [];
 }
 
-function removeNumberFromExpression() {
-	currentNumber.pop();
-	if (currentNumber.length != 0) {
-		updateDisplay()
-	}
-	else {
-		currentExpression.pop()
-		updateDisplay()
-	}
-}
+// function removeFromExpression() {
+// 	if (currentExpression.length == 1 || currentExpression.length == 3) {
+// 		removeNumberFromExpression()
+// 	}
+// 	else {
+// 		removeOperationFromExpression()
+// 	}
+// }
 
-function addNumberToExpression() {
-	// will accept operators as well but will result in syntax error
-	currentNumber.append(button.textContent);
-	updateDisplay();
-}
+// function removeNumberFromExpression() {
+// 	currentNumber.pop();
+// 	if (currentNumber.length != 0) {
+// 		updateDisplay()
+// 	}
+// 	else {
+// 		currentExpression.pop()
+// 		updateDisplay()
+// 	}
+// }
 
-function removeOperationFromExpression() {
-	currentExpression.pop();
-	updateDisplay();
-}
+// // whenever length of currentExpression is 3 and 
 
-function addOperationToExpression() {
-	currentExpression.append(currentNumber);
-	currentExpression.append(button.textContent);
-	updateDisplay();
-	// currentOperation.append();
-}
+// function addNumberToExpression() {
+// 	// will accept operators as well but will result in syntax error
+// 	currentNumber.append(button.textContent);
+// 	updateDisplay();
+// }
 
-function addNumberToExpression() {
-	currentExpression.append(currentNumber.toString());
-	updateDisplay();
-}
+// function removeOperationFromExpression() {
+// 	currentExpression.pop();
+// 	updateDisplay();
+// }
+
+// // appends the current number to the expression, completing that number
+// // appends the inputted operation
+// // [number, operator]
+// // next number appended with operate or another subsequent operator
+// function addOperationToExpression() {
+// 	currentExpression.append(currentNumber);
+// 	currentExpression.append(button.textContent);
+// 	updateDisplay();
+// 	// currentOperation.append();
+// }
+
+// function addNumberToExpression() {
+// 	currentExpression.append(currentNumber.toString());
+// 	updateDisplay();
+// }
