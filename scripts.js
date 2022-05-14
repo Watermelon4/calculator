@@ -31,8 +31,8 @@ gridButtons.forEach(function(button) {
 
 // add input to currentNum
 function addInputToCurrentNum() {
-	currentNumber += this.textContent
-	currentExpression = `${currentNumber}`;
+	currentNumber = this.textContent
+	currentExpression += currentNumber;
 	updateExpressionDisplay()
 }
 
@@ -40,6 +40,14 @@ function updateExpressionDisplay() {
 	currentExpressionDisplay.textContent = currentExpression
 }
 
+gridOperatorsButtons.forEach(function(button) {
+	button.addEventListener("click", addOperationToExpression)
+	})
+
+function addOperationToExpression() {
+	currentExpression += this.textContent;
+	updateExpressionDisplay();
+}
 // for each button, when clicked add the button's text content to the current operation
 // then check if the oplength is 3
 // if oplength == 3 operate on next click
