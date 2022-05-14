@@ -20,6 +20,10 @@ main {
   padding: 8px;
 }
 
+.display #current-expression {
+  overflow-wrap: break-word;
+}
+
 .display #current-result {
   margin-top: 4px;
   text-align: right;
