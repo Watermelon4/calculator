@@ -47,6 +47,7 @@ function addOperationToExpression() {
 	currentExpressionLength += 2;
 	if (currentExpressionLength > 2) {
 		console.log("b")
+		operate()
 		// operate and set new expression display to "result op "
 		// reset currentoplen to 2
 		currentExpressionLength = 0;
@@ -57,12 +58,32 @@ function addOperationToExpression() {
 	  updateExpressionDisplay();
 	}
 }
+
+function operate() {
+	// check validity of op
+	// determine op type
+		// if valid op, should only have one op
+		// search or keep in memory?
+	let currentExpressionArray = currentExpression.split(" ")
+	let numberA = currentExpressionArray[0]
+	let numberB = currentExpressionArray[2]
+	let currentOperator = currentExpressionArray[1]
+	let temp = add(numberA, numberB);
+	console.log(temp)
+	// switch(currentOperator) {
+	// 	case "+": 
+			
+	// }
+}
+
 // for each button, when clicked add the button's text content to the current operation
 // then check if the oplength is 3
 // if oplength == 3 operate on next click
 // else do nothing
 
 function add(a, b) {
+	a = Number(a);
+	b = Number(b)
 	return a + b;
 };
 
@@ -98,17 +119,6 @@ function checkOperationLength() {
 	// }
 	// else {
 	// 	return false
-	// }
-}
-
-function operate() {
-	// if (checkValidOperation()) {
-	// 	parseOperation()
-	// 	calculate()	
-	// 	return `${currentSum}`;
-	// }
-	// else {
-	// 	return "error";
 	// }
 }
 
