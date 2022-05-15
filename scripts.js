@@ -22,7 +22,17 @@ const SYNTAXERROR = "Syntax Error";
 const ZEROERROR = "Division By Zero Error";
 
 // remove deleteButton from the other event adder
-
+gridButtons.forEach(function(button) {
+	button.addEventListener("click", addInputToCurrentNum)
+})
+gridOperatorsButtons.forEach(function(button) {
+	button.addEventListener("click", addOperationToExpression)
+})
+deleteButton.removeEventListener("click", addInputToCurrentNum);
+deleteButton.addEventListener("click", removeLastInput);
+equals.addEventListener("click", operate)
+equals.addEventListener("click", updateResultDisplay);
+clear.addEventListener("click", clearCalculator)
 
 function removeLastInput() {
 	currentExpression = currentExpression.slice(0, -1)
@@ -30,13 +40,6 @@ function removeLastInput() {
 	// if operator
 	// if number
 }
-
-gridButtons.forEach(function(button) {
-	button.addEventListener("click", addInputToCurrentNum)
-})
-
-deleteButton.removeEventListener("click", addInputToCurrentNum);
-deleteButton.addEventListener("click", removeLastInput);
 
 function addInputToCurrentNum() {
 	if (checkError()) {
@@ -49,10 +52,6 @@ function addInputToCurrentNum() {
 function updateExpressionDisplay() {
 	currentExpressionDisplay.textContent = currentExpression
 }
-
-gridOperatorsButtons.forEach(function(button) {
-	button.addEventListener("click", addOperationToExpression)
-})
 
 /**
  * Signals the end of the first number input and adds an operator to the 
@@ -86,8 +85,6 @@ function checkError() {
 	}
 	return true
 }
-
-equals.addEventListener("click", operate)
 
 /**
  * Determines the operator to use on an expression with two numbers and an 
@@ -132,13 +129,9 @@ function checkValidOperation(result) {
 	}
 }
 
-equals.addEventListener("click", updateResultDisplay);
-
 function updateResultDisplay() {
 	currentResultDisplay.textContent = operate();
 }
-
-clear.addEventListener("click", clearCalculator)
 
 function clearCalculator() {
 	currentExpression = "";
