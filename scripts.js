@@ -45,7 +45,7 @@ gridOperatorsButtons.forEach(function(button) {
 	})
 
 function addOperationToExpression() {
-	currentExpression += this.textContent;
+	currentExpression += ` ${this.textContent} `;
 	updateExpressionDisplay();
 }
 // for each button, when clicked add the button's text content to the current operation
