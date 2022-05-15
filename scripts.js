@@ -21,8 +21,6 @@ let currentExpression = "";
 const SYNTAXERROR = "Syntax Error";
 const ZEROERROR = "Division By Zero Error";
 
-equals.addEventListener("click", operate)
-clear.addEventListener("click", clearOperation);
 // deleteButton.addEventListener("click", );
 
 gridButtons.forEach(function(button) {
@@ -64,6 +62,8 @@ function addOperationToExpression() {
 function padString(input) {
 	return ` ${input} `
 }
+
+equals.addEventListener("click", operate)
 
 /**
  * Determines the operator to use on an expression with two numbers and an 
