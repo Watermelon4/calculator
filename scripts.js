@@ -14,7 +14,6 @@ const deleteButton = grid.querySelector("#delete")
 const gridOperators = inputs.querySelector(".grid-operators")
 const gridOperatorsButtons = gridOperators.querySelectorAll("button")
 
-let currentNumber = "";
 let currentExpressionLength = 0;
 let currentResult = 0;
 let currentExpression = "";
@@ -61,6 +60,7 @@ function removeLastInput() {
 	if (expressionLength == 3 || expressionLength == 1) {
 		// remove last character from last number
 		// if after removal isempty then do not re add it
+		let currentNumber = "";
 		currentNumber = currentExpressionArray.pop();
 		currentNumber = currentNumber.slice(0, -1);
 		if (currentNumber != "") {
@@ -95,13 +95,15 @@ function addInputToCurrentNum() {
 	if (checkError()) {
 		clearCalculator();
 	};
-	if (currentExpressionArray.length != 2) {
+	let currentNumber = "";
+	let expressionLength = currentExpressionArray.length;
+	if (expressionLength != 2 && expressionLength != 0) {
 		currentNumber = currentExpressionArray.pop();
 	}
 	// replaces undefined
-	if (isNaN(currentNumber)) {
-		currentNumber = ""
-	}
+	// if (isNaN(currentNumber)) {
+	// 	currentNumber = ""
+	// }
 	currentNumber += this.textContent;
 	currentExpressionArray.push(currentNumber);
 	updateExpressionDisplay();
@@ -128,7 +130,7 @@ function addOperationToExpression() {
 		currentExpressionArray.push(this.textContent);
 	  updateExpressionDisplay();
 	}
-	currentNumber = ""
+	// currentNumber = ""
 }
 
 function padString(input) {
