@@ -46,11 +46,13 @@ gridOperatorsButtons.forEach(function(button) {
 function addOperationToExpression() {
 	currentExpressionLength += 2;
 	if (currentExpressionLength > 2) {
-		console.log("b")
-		operate()
 		// operate and set new expression display to "result op "
 		// reset currentoplen to 2
+		currentResult = operate()
+		console.log(currentResult)
 		currentExpressionLength = 0;
+		// set new current expression
+		// currentExpression = `${currentResult} ${currentOperator} `;
 	}
 	else {
 		// update current expression display with op
@@ -64,17 +66,21 @@ function operate() {
 	// determine op type
 		// if valid op, should only have one op
 		// search or keep in memory?
-	let currentExpressionArray = currentExpression.split(" ")
-	let numberA = currentExpressionArray[0]
-	let numberB = currentExpressionArray[2]
-	let currentOperator = currentExpressionArray[1]
-	let temp = add(numberA, numberB);
-	console.log(temp)
-	// switch(currentOperator) {
-	// 	case "+": 
-			
-	// }
-}
+	let currentExpressionArray = currentExpression.split(" ");
+	let numberA = Number(currentExpressionArray[0]);
+	let numberB = Number(currentExpressionArray[2]);
+	let currentOperator = currentExpressionArray[1];
+	switch(currentOperator) {
+		case "+": 
+			return add(numberA, numberB);
+		case "−": 
+			return subtract(numberA, numberB);
+		case "×": 
+			return multiply(numberA, numberB);
+		default: 
+			return divide(numberA, numberB);
+	};
+};
 
 // for each button, when clicked add the button's text content to the current operation
 // then check if the oplength is 3
@@ -82,8 +88,6 @@ function operate() {
 // else do nothing
 
 function add(a, b) {
-	a = Number(a);
-	b = Number(b)
 	return a + b;
 };
 
