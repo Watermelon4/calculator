@@ -8,7 +8,8 @@ features implemented
 - division
 - chaining multiple operations
 - clear
+- auto clear after error
 
 features to implement
 - delete
-- auto clear after error
+- remove result display after using equals
