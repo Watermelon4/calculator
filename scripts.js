@@ -17,7 +17,7 @@ const gridOperatorsButtons = gridOperators.querySelectorAll("button")
 let currentNumber = "";
 let currentOperation = "";
 let currentResult = 0;
-let currentExpression = [];
+let currentExpression = "";
 const SYNTAXERROR = "Syntax Error";
 const ZEROERROR = "Divide by zero error";
 
@@ -27,12 +27,11 @@ clear.addEventListener("click", clearOperation);
 
 gridButtons.forEach(function(button) {
 	button.addEventListener("click", addInputToCurrentNum)
-	})
+})
 
 // add input to currentNum
 function addInputToCurrentNum() {
-	currentNumber = this.textContent
-	currentExpression += currentNumber;
+	currentExpression += this.textContent;
 	updateExpressionDisplay()
 }
 
