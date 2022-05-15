@@ -22,11 +22,13 @@ main {
 }
 
 .display #current-expression {
+  min-height: 20px;
   overflow-wrap: break-word;
 }
 
 .display #current-result {
   margin-top: 4px;
+  min-height: 22px;
   text-align: right;
   font-size: large;
 }
