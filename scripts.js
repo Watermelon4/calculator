@@ -77,14 +77,6 @@ function removeLastInput() {
 	updateExpressionDisplay();
 }
 
-// function addInputToCurrentNum() {
-// 	if (checkError()) {
-// 		clearCalculator()
-// 	}
-// 	currentExpression += this.textContent;
-// 	updateExpressionDisplay()
-// }
-
 function updateExpressionDisplay() {
 	currentExpression = convertExpressionArrayToString()
 	currentExpressionDisplay.textContent = currentExpression
@@ -124,19 +116,19 @@ function addOperationToExpression() {
 	if (checkError()) {
 		clearCalculator()
 	}
+	clearResultDisplay();
 	// currentExpressionArray.push(this.textContent)
 	currentExpressionLength = currentExpressionArray.length;
 	if (currentExpressionLength > 1) {
 		currentResult = operate()
-		// currentExpressionLength = 2;
-		currentExpressionArray = [currentResult, this.textContent, ""];
+		currentExpressionArray = [currentResult, this.textContent];
 		updateExpressionDisplay()
 	}
 	else {
 		currentExpressionArray.push(this.textContent);
-		currentExpressionArray.push("");
 	  updateExpressionDisplay();
 	}
+	currentNumber = ""
 }
 
 function padString(input) {
@@ -148,6 +140,10 @@ function checkError() {
 		return false
 	}
 	return true
+}
+
+function clearResultDisplay() {
+	currentResultDisplay.textContent = "";
 }
 
 /**
