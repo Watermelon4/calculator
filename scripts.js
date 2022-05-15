@@ -32,14 +32,8 @@ equals.addEventListener("click", updateResultDisplay);
 equals.addEventListener("click", disableDelete);
 clear.addEventListener("click", clearCalculator)
 
-function disableDelete() {
-	deleteButton.removeEventListener("click", removeLastInput);
-}
 
-function enableDelete() {
-	deleteButton.addEventListener("click", removeLastInput);
-}
-
+// Main Controls
 function removeLastInput() {
 	const expressionLength = currentExpressionArray.length;
 	if (expressionLength == 3 || expressionLength == 1) {
@@ -62,20 +56,6 @@ function removeLastInput() {
 	updateExpressionDisplay();
 }
 
-function updateExpressionDisplay() {
-	const currentExpression = convertExpressionArrayToString()
-	currentExpressionDisplay.textContent = currentExpression
-}
-
-function convertExpressionArrayToString() {
-	let currentExpression = "";
-	let expressionLength = currentExpressionArray.length;
-	for (let i = 0; i < expressionLength; i++) {
-		currentExpression += currentExpressionArray[i];
-	};
-	return currentExpression;
-};
-
 function addInputToCurrentNum() {
 	if (checkError()) {
 		clearCalculator();
@@ -85,10 +65,6 @@ function addInputToCurrentNum() {
 	if (expressionLength != 2 && expressionLength != 0) {
 		currentNumber = currentExpressionArray.pop();
 	}
-	// replaces undefined
-	// if (isNaN(currentNumber)) {
-	// 	currentNumber = ""
-	// }
 	currentNumber += this.textContent;
 	currentExpressionArray.push(currentNumber);
 	updateExpressionDisplay();
@@ -116,21 +92,6 @@ function addOperationToExpression() {
 	}
 }
 
-function padString(input) {
-	return ` ${input} `
-}
-
-function checkError() {
-	if (!isNaN(Number(currentResultDisplay.textContent))) {
-		return false
-	}
-	return true
-}
-
-function clearResultDisplay() {
-	currentResultDisplay.textContent = "";
-}
-
 /**
  * Determines the operator to use on an expression with two numbers and an 
  * operator.
@@ -140,7 +101,6 @@ function operate() {
 	if (currentExpressionArray.length == 0) {
 		return
 	}
-	// let currentExpressionArray = currentExpression.split(" ");
 	let numberA = Number(currentExpressionArray[0]);
 	let numberB = Number(currentExpressionArray[2]);
 	let currentOperator = currentExpressionArray[1];
@@ -157,6 +117,14 @@ function operate() {
 			return numberA
 	};
 };
+
+// Condition Checkers
+function checkError() {
+	if (!isNaN(Number(currentResultDisplay.textContent))) {
+		return false
+	}
+	return true
+}
 
 /**
  * Returns an error message if the operation resulted in NaN or infinity, 
@@ -176,9 +144,33 @@ function checkValidOperation(result) {
 	}
 }
 
+// String Generators and Modifiers
+function convertExpressionArrayToString() {
+	let currentExpression = "";
+	let expressionLength = currentExpressionArray.length;
+	for (let i = 0; i < expressionLength; i++) {
+		currentExpression += currentExpressionArray[i];
+	};
+	return currentExpression;
+};
+
+function padString(input) {
+	return ` ${input} `;
+};
+
+// Display Updates
+function updateExpressionDisplay() {
+	const currentExpression = convertExpressionArrayToString()
+	currentExpressionDisplay.textContent = currentExpression
+}
+
 function updateResultDisplay() {
 	currentResultDisplay.textContent = operate();
 };
+
+function clearResultDisplay() {
+	currentResultDisplay.textContent = "";
+}
 
 function clearCalculator() {
 	currentExpressionArray = [];
@@ -186,6 +178,7 @@ function clearCalculator() {
 	currentResultDisplay.textContent = "";
 };
 
+// Arithmetic Operators
 function add(a, b) {
 	return a + b;
 };
@@ -201,3 +194,12 @@ function multiply(a, b) {
 function divide(a, b) {
 	return a / b;
 };
+
+// Delete Button Control
+function disableDelete() {
+	deleteButton.removeEventListener("click", removeLastInput);
+}
+
+function enableDelete() {
+	deleteButton.addEventListener("click", removeLastInput);
+}
