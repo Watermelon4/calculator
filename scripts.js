@@ -94,6 +94,15 @@ function updateResultDisplay() {
 	currentResultDisplay.textContent = operate();
 }
 
+clear.addEventListener("click", clearCalculator)
+
+function clearCalculator() {
+	currentExpression = "";
+	currentResult = "";
+	currentExpressionDisplay.textContent = currentExpression;
+	currentResultDisplay.textContent = currentResult;
+}
+
 // for each button, when clicked add the button's text content to the current operation
 // then check if the oplength is 3
 // if oplength == 3 operate on next click
