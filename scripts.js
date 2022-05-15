@@ -78,15 +78,27 @@ function operate() {
 	let currentOperator = currentExpressionArray[1];
 	switch(currentOperator) {
 		case "+": 
-			return add(numberA, numberB);
+			return checkValidOperation(add(numberA, numberB));
 		case "−": 
-			return subtract(numberA, numberB);
+			return checkValidOperation(subtract(numberA, numberB));
 		case "×": 
-			return multiply(numberA, numberB);
+			return checkValidOperation(multiply(numberA, numberB));
 		default: 
-			return divide(numberA, numberB);
+			return checkValidOperation(divide(numberA, numberB));
 	};
 };
+
+function checkValidOperation(result) {
+	console.log(result)
+	if (!isNaN(result) && isFinite(result)) {
+		return result;
+	} else if (!isFinite(result) && !isNaN(result)) {
+		return ZEROERROR;
+	}
+	else {
+		return SYNTAXERROR;
+	}
+}
 
 equals.addEventListener("click", updateResultDisplay);
 
@@ -125,7 +137,7 @@ function divide(a, b) {
 	return a / b;
 };
 
-const checkValidOperation = function(currentOperation) {
+// const checkValidOperation = function(currentOperation) {
 	// check for three items in list
 	// checkOperationLength();
 
@@ -137,7 +149,7 @@ const checkValidOperation = function(currentOperation) {
 	// else {
 	// 	return false
 	// }
-};
+// };
 
 function checkOperationLength() {
 	// if (currentOperation.length == 3) {
