@@ -28,6 +28,9 @@ gridButtons.forEach(function(button) {
 })
 
 function addInputToCurrentNum() {
+	if (checkError()) {
+		clearCalculator()
+	}
 	currentExpression += this.textContent;
 	updateExpressionDisplay()
 }
@@ -46,6 +49,9 @@ gridOperatorsButtons.forEach(function(button) {
  * when an operator is pressed again.
  */
 function addOperationToExpression() {
+	if (checkError()) {
+		clearCalculator()
+	}
 	currentExpressionLength += 2;
 	if (currentExpressionLength > 2) {
 		currentResult = operate()
@@ -61,6 +67,13 @@ function addOperationToExpression() {
 
 function padString(input) {
 	return ` ${input} `
+}
+
+function checkError() {
+	if (!isNaN(Number(currentResult))) {
+		return false
+	}
+	return true
 }
 
 equals.addEventListener("click", operate)
