@@ -1,18 +1,18 @@
-const main = document.querySelector("main")
-const calculator = main.querySelector(".calculator")
-const display = calculator.querySelector(".display")
-const currentExpressionDisplay = display.querySelector("#current-expression")
-const currentResultDisplay = display.querySelector("#current-result")
-const controls = calculator.querySelector(".controls")
-const complete = controls.querySelector(".complete")
-const equals = complete.querySelector("#equals")
-const clear = complete.querySelector("#clear")
-const inputs = controls.querySelector(".inputs")
-const grid = inputs.querySelector(".grid")
-let gridButtons = grid.querySelectorAll("button")
-const deleteButton = grid.querySelector("#delete")
-const gridOperators = inputs.querySelector(".grid-operators")
-const gridOperatorsButtons = gridOperators.querySelectorAll("button")
+const main = document.querySelector("main");
+const calculator = main.querySelector(".calculator");
+const display = calculator.querySelector(".display");
+const currentExpressionDisplay = display.querySelector("#current-expression");
+const currentResultDisplay = display.querySelector("#current-result");
+const controls = calculator.querySelector(".controls");
+const complete = controls.querySelector(".complete");
+const equals = complete.querySelector("#equals");
+const clear = complete.querySelector("#clear");
+const inputs = controls.querySelector(".inputs");
+const grid = inputs.querySelector(".grid");
+let gridButtons = grid.querySelectorAll("button");
+const deleteButton = grid.querySelector("#delete");
+const gridOperators = inputs.querySelector(".grid-operators");
+const gridOperatorsButtons = gridOperators.querySelectorAll("button");
 
 /**
  * True when the equals button is pressed and causes any numerical inputs 
@@ -23,20 +23,20 @@ let currentExpressionArray = [];
 const SYNTAXERROR = "Syntax Error";
 const ZEROERROR = "Division By Zero Error";
 
-gridButtons.forEach(function(button) {
-	button.addEventListener("click", addInputToCurrentNum)
-})
-gridOperatorsButtons.forEach(function(button) {
-	button.addEventListener("click", addOperationToExpression)
-	button.addEventListener("click", enableDelete)
-})
+gridButtons.forEach(function (button) {
+	button.addEventListener("click", addInputToCurrentNum);
+});
+gridOperatorsButtons.forEach(function (button) {
+	button.addEventListener("click", addOperationToExpression);
+	button.addEventListener("click", enableDelete);
+});
 deleteButton.removeEventListener("click", addInputToCurrentNum);
 deleteButton.addEventListener("click", removeLastInput);
 equals.addEventListener("click", operate);
 equals.addEventListener("click", updateResultDisplay);
 equals.addEventListener("click", disableDelete);
-equals.addEventListener("click", enableEqualsPressed)
-clear.addEventListener("click", clearCalculator)
+equals.addEventListener("click", enableEqualsPressed);
+clear.addEventListener("click", clearCalculator);
 
 
 // Main Controls
@@ -47,14 +47,14 @@ function removeLastInput() {
 		currentNumber = currentExpressionArray.pop();
 		currentNumber = currentNumber.slice(0, -1);
 		if (currentNumber != "") {
-			currentExpressionArray.push(currentNumber)
+			currentExpressionArray.push(currentNumber);
 		}
 	}
 	else if (expressionLength == 2) {
 		currentExpressionArray.pop()
-	}
+	};
 	updateExpressionDisplay();
-}
+};
 
 function addInputToCurrentNum() {
 	if (checkError() || equalsPressed) {
@@ -65,7 +65,7 @@ function addInputToCurrentNum() {
 	let expressionLength = currentExpressionArray.length;
 	if (expressionLength != 2 && expressionLength != 0) {
 		currentNumber = currentExpressionArray.pop();
-	}
+	};
 	currentNumber += this.textContent;
 	currentExpressionArray.push(currentNumber);
 	updateExpressionDisplay();
@@ -78,21 +78,21 @@ function addInputToCurrentNum() {
  */
 function addOperationToExpression() {
 	if (checkError()) {
-		clearCalculator()
-	}
+		clearCalculator();
+	};
 	equalsPressed = false;
 	clearResultDisplay();
 	const currentExpressionLength = currentExpressionArray.length;
 	if (currentExpressionLength > 1) {
 		const currentResult = operate();
 		currentExpressionArray = [currentResult, this.textContent];
-		updateExpressionDisplay()
+		updateExpressionDisplay();
 	}
 	else {
 		currentExpressionArray.push(this.textContent);
-	  updateExpressionDisplay();
-	}
-}
+		updateExpressionDisplay();
+	};
+};
 
 /**
  * Determines the operator to use on an expression with two numbers and an 
@@ -101,32 +101,32 @@ function addOperationToExpression() {
  */
 function operate() {
 	if (currentExpressionArray.length == 0) {
-		return
-	}
+		return;
+	};
 	let numberA = Number(currentExpressionArray[0]);
 	let numberB = Number(currentExpressionArray[2]);
 	let currentOperator = currentExpressionArray[1];
-	switch(currentOperator) {
-		case "+": 
+	switch (currentOperator) {
+		case "+":
 			return checkValidOperation(add(numberA, numberB));
-		case "−": 
+		case "−":
 			return checkValidOperation(subtract(numberA, numberB));
-		case "×": 
+		case "×":
 			return checkValidOperation(multiply(numberA, numberB));
-		case "÷": 
+		case "÷":
 			return checkValidOperation(divide(numberA, numberB));
 		default:
-			return numberA
+			return numberA;
 	};
 };
 
 // Condition Checkers
 function checkError() {
 	if (!isNaN(Number(currentResultDisplay.textContent))) {
-		return false
-	}
-	return true
-}
+		return false;
+	};
+	return true;
+};
 
 /**
  * Returns an error message if the operation resulted in NaN or infinity, 
@@ -135,7 +135,7 @@ function checkError() {
  * @returns result or an error message
  */
 function checkValidOperation(result) {
-	console.log(result)
+	console.log(result);
 	if (!isNaN(result) && isFinite(result)) {
 		return result;
 	} else if (!isFinite(result) && !isNaN(result)) {
@@ -143,8 +143,8 @@ function checkValidOperation(result) {
 	}
 	else {
 		return SYNTAXERROR;
-	}
-}
+	};
+};
 
 // String Generators and Modifiers
 function convertExpressionArrayToString() {
@@ -162,9 +162,9 @@ function padString(input) {
 
 // Display Updates
 function updateExpressionDisplay() {
-	const currentExpression = convertExpressionArrayToString()
-	currentExpressionDisplay.textContent = currentExpression
-}
+	const currentExpression = convertExpressionArrayToString();
+	currentExpressionDisplay.textContent = currentExpression;
+};
 
 function updateResultDisplay() {
 	currentResultDisplay.textContent = operate();
@@ -172,7 +172,7 @@ function updateResultDisplay() {
 
 function clearResultDisplay() {
 	currentResultDisplay.textContent = "";
-}
+};
 
 function clearCalculator() {
 	currentExpressionArray = [];
@@ -200,12 +200,12 @@ function divide(a, b) {
 // Delete Button Control
 function disableDelete() {
 	deleteButton.removeEventListener("click", removeLastInput);
-}
+};
 
 function enableDelete() {
 	deleteButton.addEventListener("click", removeLastInput);
-}
+};
 
 function enableEqualsPressed() {
-	equalsPressed = true
-}
+	equalsPressed = true;
+};
