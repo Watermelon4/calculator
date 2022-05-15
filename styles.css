@@ -76,6 +76,10 @@ main {
   flex-wrap: wrap;
 }
 
+.controls .inputs .grid-operators button {
+  background-color: pink;
+}
+
 .controls .inputs button {
   width: 64px;
   height: 64px;
