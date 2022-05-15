@@ -41,7 +41,7 @@ function updateExpressionDisplay() {
 
 gridOperatorsButtons.forEach(function(button) {
 	button.addEventListener("click", addOperationToExpression)
-	})
+})
 
 function addOperationToExpression() {
 	currentExpressionLength += 2;
@@ -87,6 +87,12 @@ function operate() {
 			return divide(numberA, numberB);
 	};
 };
+
+equals.addEventListener("click", updateResultDisplay);
+
+function updateResultDisplay() {
+	currentResultDisplay.textContent = operate();
+}
 
 // for each button, when clicked add the button's text content to the current operation
 // then check if the oplength is 3
