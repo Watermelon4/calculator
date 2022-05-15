@@ -42,6 +42,11 @@ gridOperatorsButtons.forEach(function(button) {
 	button.addEventListener("click", addOperationToExpression)
 })
 
+/**
+ * Signals the end of the first number input and adds an operator to the 
+ * <currentExpression> based on the operator pressed. Automatically evaluates 
+ * when an operator is pressed again.
+ */
 function addOperationToExpression() {
 	currentExpressionLength += 2;
 	if (currentExpressionLength > 2) {
@@ -60,6 +65,11 @@ function padString(input) {
 	return ` ${input} `
 }
 
+/**
+ * Determines the operator to use on an expression with two numbers and an 
+ * operator.
+ * @returns operation result or error
+ */
 function operate() {
 	let currentExpressionArray = currentExpression.split(" ");
 	let numberA = Number(currentExpressionArray[0]);
@@ -77,6 +87,12 @@ function operate() {
 	};
 };
 
+/**
+ * Returns an error message if the operation resulted in NaN or infinity, 
+ * otherwise no change is made and returns the operation result.
+ * @param {Number} result 
+ * @returns result or an error message
+ */
 function checkValidOperation(result) {
 	console.log(result)
 	if (!isNaN(result) && isFinite(result)) {
