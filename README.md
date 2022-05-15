@@ -9,7 +9,5 @@ features implemented
 - chaining multiple operations
 - clear
 - auto clear after error
+- auto clear when writing new expression after using equals button
 - delete
-
-features to implement
-- remove result display after using equals
