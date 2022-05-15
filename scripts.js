@@ -70,7 +70,7 @@ function padString(input) {
 }
 
 function checkError() {
-	if (!isNaN(Number(currentResult))) {
+	if (!isNaN(Number(currentResultDisplay.textContent))) {
 		return false
 	}
 	return true
