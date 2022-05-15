@@ -11,3 +11,6 @@ features implemented
 - auto clear after error
 - auto clear when writing new expression after using equals button
 - delete
+
+feature to implement
+- keyboard input
