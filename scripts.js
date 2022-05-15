@@ -27,18 +27,33 @@ gridButtons.forEach(function(button) {
 })
 gridOperatorsButtons.forEach(function(button) {
 	button.addEventListener("click", addOperationToExpression)
+	button.addEventListener("click", enableDelete)
 })
 deleteButton.removeEventListener("click", addInputToCurrentNum);
 deleteButton.addEventListener("click", removeLastInput);
-equals.addEventListener("click", operate)
+equals.addEventListener("click", operate);
 equals.addEventListener("click", updateResultDisplay);
+equals.addEventListener("click", disableDelete);
 clear.addEventListener("click", clearCalculator)
 
+function disableDelete() {
+	deleteButton.removeEventListener("click", removeLastInput);
+}
+
+function enableDelete() {
+	deleteButton.addEventListener("click", removeLastInput);
+}
+
 function removeLastInput() {
-	currentExpression = currentExpression.slice(0, -1)
+	let lastCharacter = currentExpression.slice(-1);
+	if (!(lastCharacter == " ")) {
+	  currentExpression = currentExpression.slice(0, -1);
+	}
+	else {
+		currentExpression = currentExpression.slice(0, -3);
+	}
+	currentExpressionLength -= 1;
 	updateExpressionDisplay()
-	// if operator
-	// if number
 }
 
 function addInputToCurrentNum() {
@@ -131,7 +146,7 @@ function checkValidOperation(result) {
 
 function updateResultDisplay() {
 	currentResultDisplay.textContent = operate();
-}
+};
 
 function clearCalculator() {
 	currentExpression = "";
@@ -139,7 +154,7 @@ function clearCalculator() {
 	currentExpressionDisplay.textContent = currentExpression;
 	currentResultDisplay.textContent = currentResult;
 	currentExpressionLength = 0;
-}
+};
 
 function add(a, b) {
 	return a + b;
