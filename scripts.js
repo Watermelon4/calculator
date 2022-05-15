@@ -21,11 +21,22 @@ let currentExpression = "";
 const SYNTAXERROR = "Syntax Error";
 const ZEROERROR = "Division By Zero Error";
 
-// deleteButton.addEventListener("click", );
+// remove deleteButton from the other event adder
+
+
+function removeLastInput() {
+	currentExpression = currentExpression.slice(0, -1)
+	updateExpressionDisplay()
+	// if operator
+	// if number
+}
 
 gridButtons.forEach(function(button) {
 	button.addEventListener("click", addInputToCurrentNum)
 })
+
+deleteButton.removeEventListener("click", addInputToCurrentNum);
+deleteButton.addEventListener("click", removeLastInput);
 
 function addInputToCurrentNum() {
 	if (checkError()) {
@@ -84,6 +95,9 @@ equals.addEventListener("click", operate)
  * @returns operation result or error
  */
 function operate() {
+	if (currentExpression == "") {
+		return
+	}
 	let currentExpressionArray = currentExpression.split(" ");
 	let numberA = Number(currentExpressionArray[0]);
 	let numberB = Number(currentExpressionArray[2]);
