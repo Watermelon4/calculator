@@ -9,7 +9,7 @@ features implemented
 - chaining multiple operations
 - clear
 - auto clear after error
+- delete
 
 features to implement
-- delete
 - remove result display after using equals
