@@ -18,6 +18,7 @@ let currentNumber = "";
 let currentExpressionLength = 0;
 let currentResult = 0;
 let currentExpression = "";
+let currentExpressionArray = [];
 const SYNTAXERROR = "Syntax Error";
 const ZEROERROR = "Division By Zero Error";
 
@@ -43,29 +44,73 @@ function enableDelete() {
 	deleteButton.addEventListener("click", removeLastInput);
 }
 
+// function removeLastInput() {
+// 	let lastCharacter = currentExpression.slice(-1);
+// 	if (!(lastCharacter == " ")) {
+// 	  currentExpression = currentExpression.slice(0, -1);
+// 	}
+// 	else {
+// 		currentExpression = currentExpression.slice(0, -3);
+// 	}
+// 	currentExpressionLength -= 1;
+// 	updateExpressionDisplay()
+// }
+
 function removeLastInput() {
-	let lastCharacter = currentExpression.slice(-1);
-	if (!(lastCharacter == " ")) {
-	  currentExpression = currentExpression.slice(0, -1);
+	let expressionLength = currentExpressionArray.length;
+	if (expressionLength == 3 || expressionLength == 1) {
+		// remove last character from last number
+		// if after removal isempty then do not re add it
+		currentNumber = currentExpressionArray.pop();
+		currentNumber = currentNumber.slice(0, -1);
+		if (currentNumber != "") {
+			currentExpressionArray.push(currentNumber)
+		}
+	}
+	else if (expressionLength == 2) {
+		// remove operator
+		currentExpressionArray.pop()
 	}
 	else {
-		currentExpression = currentExpression.slice(0, -3);
+		// do nothing
 	}
-	currentExpressionLength -= 1;
-	updateExpressionDisplay()
+	updateExpressionDisplay();
 }
+
+// function addInputToCurrentNum() {
+// 	if (checkError()) {
+// 		clearCalculator()
+// 	}
+// 	currentExpression += this.textContent;
+// 	updateExpressionDisplay()
+// }
+
+function updateExpressionDisplay() {
+	currentExpression = convertExpressionArrayToString()
+	currentExpressionDisplay.textContent = currentExpression
+}
+
+function convertExpressionArrayToString() {
+	let currentExpression = "";
+	let numItemsInExpression = currentExpressionArray.length;
+	for (let i = 0; i < numItemsInExpression; i++) {
+		currentExpression += currentExpressionArray[i];
+	};
+	return currentExpression;
+};
 
 function addInputToCurrentNum() {
 	if (checkError()) {
-		clearCalculator()
+		clearCalculator();
+	};
+	currentNumber = currentExpressionArray.pop();
+	if (isNaN(currentNumber)) {
+		currentNumber = ""
 	}
-	currentExpression += this.textContent;
-	updateExpressionDisplay()
-}
-
-function updateExpressionDisplay() {
-	currentExpressionDisplay.textContent = currentExpression
-}
+	currentNumber += this.textContent;
+	currentExpressionArray.push(currentNumber);
+	updateExpressionDisplay();
+};
 
 /**
  * Signals the end of the first number input and adds an operator to the 
@@ -76,15 +121,17 @@ function addOperationToExpression() {
 	if (checkError()) {
 		clearCalculator()
 	}
-	currentExpressionLength += 2;
+	// currentExpressionArray.push(this.textContent)
+	currentExpressionLength = currentExpressionArray.length;
 	if (currentExpressionLength > 2) {
 		currentResult = operate()
-		currentExpressionLength = 2;
-		currentExpression = currentResult + padString(this.textContent);
+		// currentExpressionLength = 2;
+		currentExpressionArray = [currentResult, this.textContent, ""];
 		updateExpressionDisplay()
 	}
 	else {
-		currentExpression += padString(this.textContent);
+		currentExpressionArray.push(this.textContent);
+		currentExpressionArray.push("");
 	  updateExpressionDisplay();
 	}
 }
@@ -106,10 +153,10 @@ function checkError() {
  * @returns operation result or error
  */
 function operate() {
-	if (currentExpression == "") {
+	if (currentExpressionArray.length == 0) {
 		return
 	}
-	let currentExpressionArray = currentExpression.split(" ");
+	// let currentExpressionArray = currentExpression.split(" ");
 	let numberA = Number(currentExpressionArray[0]);
 	let numberB = Number(currentExpressionArray[2]);
 	let currentOperator = currentExpressionArray[1];
@@ -150,6 +197,7 @@ function updateResultDisplay() {
 };
 
 function clearCalculator() {
+	currentExpressionArray = [];
 	currentExpression = "";
 	currentResult = "";
 	currentExpressionDisplay.textContent = currentExpression;
