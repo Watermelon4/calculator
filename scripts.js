@@ -21,7 +21,6 @@ let currentExpression = "";
 const SYNTAXERROR = "Syntax Error";
 const ZEROERROR = "Division By Zero Error";
 
-// remove deleteButton from the other event adder
 gridButtons.forEach(function(button) {
 	button.addEventListener("click", addInputToCurrentNum)
 })
@@ -121,8 +120,10 @@ function operate() {
 			return checkValidOperation(subtract(numberA, numberB));
 		case "×": 
 			return checkValidOperation(multiply(numberA, numberB));
-		default: 
+		case "÷": 
 			return checkValidOperation(divide(numberA, numberB));
+		default:
+			return numberA
 	};
 };
 
