@@ -14,9 +14,6 @@ const deleteButton = grid.querySelector("#delete")
 const gridOperators = inputs.querySelector(".grid-operators")
 const gridOperatorsButtons = gridOperators.querySelectorAll("button")
 
-let currentExpressionLength = 0;
-let currentResult = 0;
-let currentExpression = "";
 let currentExpressionArray = [];
 const SYNTAXERROR = "Syntax Error";
 const ZEROERROR = "Division By Zero Error";
@@ -43,20 +40,8 @@ function enableDelete() {
 	deleteButton.addEventListener("click", removeLastInput);
 }
 
-// function removeLastInput() {
-// 	let lastCharacter = currentExpression.slice(-1);
-// 	if (!(lastCharacter == " ")) {
-// 	  currentExpression = currentExpression.slice(0, -1);
-// 	}
-// 	else {
-// 		currentExpression = currentExpression.slice(0, -3);
-// 	}
-// 	currentExpressionLength -= 1;
-// 	updateExpressionDisplay()
-// }
-
 function removeLastInput() {
-	let expressionLength = currentExpressionArray.length;
+	const expressionLength = currentExpressionArray.length;
 	if (expressionLength == 3 || expressionLength == 1) {
 		// remove last character from last number
 		// if after removal isempty then do not re add it
@@ -78,14 +63,14 @@ function removeLastInput() {
 }
 
 function updateExpressionDisplay() {
-	currentExpression = convertExpressionArrayToString()
+	const currentExpression = convertExpressionArrayToString()
 	currentExpressionDisplay.textContent = currentExpression
 }
 
 function convertExpressionArrayToString() {
 	let currentExpression = "";
-	let numItemsInExpression = currentExpressionArray.length;
-	for (let i = 0; i < numItemsInExpression; i++) {
+	let expressionLength = currentExpressionArray.length;
+	for (let i = 0; i < expressionLength; i++) {
 		currentExpression += currentExpressionArray[i];
 	};
 	return currentExpression;
@@ -119,10 +104,9 @@ function addOperationToExpression() {
 		clearCalculator()
 	}
 	clearResultDisplay();
-	// currentExpressionArray.push(this.textContent)
-	currentExpressionLength = currentExpressionArray.length;
+	const currentExpressionLength = currentExpressionArray.length;
 	if (currentExpressionLength > 1) {
-		currentResult = operate()
+		const currentResult = operate();
 		currentExpressionArray = [currentResult, this.textContent];
 		updateExpressionDisplay()
 	}
@@ -130,7 +114,6 @@ function addOperationToExpression() {
 		currentExpressionArray.push(this.textContent);
 	  updateExpressionDisplay();
 	}
-	// currentNumber = ""
 }
 
 function padString(input) {
@@ -199,11 +182,8 @@ function updateResultDisplay() {
 
 function clearCalculator() {
 	currentExpressionArray = [];
-	currentExpression = "";
-	currentResult = "";
-	currentExpressionDisplay.textContent = currentExpression;
-	currentResultDisplay.textContent = currentResult;
-	currentExpressionLength = 0;
+	currentExpressionDisplay.textContent = "";
+	currentResultDisplay.textContent = "";
 };
 
 function add(a, b) {
