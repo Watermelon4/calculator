@@ -49,16 +49,22 @@ function addOperationToExpression() {
 		// operate and set new expression display to "result op "
 		// reset currentoplen to 2
 		currentResult = operate()
-		console.log(currentResult)
-		currentExpressionLength = 0;
+		currentExpressionLength = 2;
+		currentExpression = currentResult + padString(this.textContent);
+		updateExpressionDisplay()
+
 		// set new current expression
 		// currentExpression = `${currentResult} ${currentOperator} `;
 	}
 	else {
 		// update current expression display with op
-		currentExpression += ` ${this.textContent} `;
+		currentExpression += padString(this.textContent);
 	  updateExpressionDisplay();
 	}
+}
+
+function padString(input) {
+	return ` ${input} `
 }
 
 function operate() {
