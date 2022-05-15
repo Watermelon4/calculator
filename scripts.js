@@ -15,7 +15,7 @@ const gridOperators = inputs.querySelector(".grid-operators")
 const gridOperatorsButtons = gridOperators.querySelectorAll("button")
 
 let currentNumber = "";
-let currentOperation = "";
+let currentExpressionLength = 0;
 let currentResult = 0;
 let currentExpression = "";
 const SYNTAXERROR = "Syntax Error";
@@ -44,8 +44,18 @@ gridOperatorsButtons.forEach(function(button) {
 	})
 
 function addOperationToExpression() {
-	currentExpression += ` ${this.textContent} `;
-	updateExpressionDisplay();
+	currentExpressionLength += 2;
+	if (currentExpressionLength > 2) {
+		console.log("b")
+		// operate and set new expression display to "result op "
+		// reset currentoplen to 2
+		currentExpressionLength = 0;
+	}
+	else {
+		// update current expression display with op
+		currentExpression += ` ${this.textContent} `;
+	  updateExpressionDisplay();
+	}
 }
 // for each button, when clicked add the button's text content to the current operation
 // then check if the oplength is 3
