@@ -14,6 +14,11 @@ const deleteButton = grid.querySelector("#delete")
 const gridOperators = inputs.querySelector(".grid-operators")
 const gridOperatorsButtons = gridOperators.querySelectorAll("button")
 
+/**
+ * True when the equals button is pressed and causes any numerical inputs 
+ * to clear the calculator. False after any number or operation is pressed.
+ */
+let equalsPressed = false;
 let currentExpressionArray = [];
 const SYNTAXERROR = "Syntax Error";
 const ZEROERROR = "Division By Zero Error";
@@ -30,6 +35,7 @@ deleteButton.addEventListener("click", removeLastInput);
 equals.addEventListener("click", operate);
 equals.addEventListener("click", updateResultDisplay);
 equals.addEventListener("click", disableDelete);
+equals.addEventListener("click", enableEqualsPressed)
 clear.addEventListener("click", clearCalculator)
 
 
@@ -37,8 +43,6 @@ clear.addEventListener("click", clearCalculator)
 function removeLastInput() {
 	const expressionLength = currentExpressionArray.length;
 	if (expressionLength == 3 || expressionLength == 1) {
-		// remove last character from last number
-		// if after removal isempty then do not re add it
 		let currentNumber = "";
 		currentNumber = currentExpressionArray.pop();
 		currentNumber = currentNumber.slice(0, -1);
@@ -47,19 +51,16 @@ function removeLastInput() {
 		}
 	}
 	else if (expressionLength == 2) {
-		// remove operator
 		currentExpressionArray.pop()
-	}
-	else {
-		// do nothing
 	}
 	updateExpressionDisplay();
 }
 
 function addInputToCurrentNum() {
-	if (checkError()) {
+	if (checkError() || equalsPressed) {
 		clearCalculator();
 	};
+	equalsPressed = false;
 	let currentNumber = "";
 	let expressionLength = currentExpressionArray.length;
 	if (expressionLength != 2 && expressionLength != 0) {
@@ -79,6 +80,7 @@ function addOperationToExpression() {
 	if (checkError()) {
 		clearCalculator()
 	}
+	equalsPressed = false;
 	clearResultDisplay();
 	const currentExpressionLength = currentExpressionArray.length;
 	if (currentExpressionLength > 1) {
@@ -202,4 +204,8 @@ function disableDelete() {
 
 function enableDelete() {
 	deleteButton.addEventListener("click", removeLastInput);
+}
+
+function enableEqualsPressed() {
+	equalsPressed = true
 }
