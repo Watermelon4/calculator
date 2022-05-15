@@ -103,7 +103,10 @@ function addInputToCurrentNum() {
 	if (checkError()) {
 		clearCalculator();
 	};
-	currentNumber = currentExpressionArray.pop();
+	if (currentExpressionArray.length != 2) {
+		currentNumber = currentExpressionArray.pop();
+	}
+	// replaces undefined
 	if (isNaN(currentNumber)) {
 		currentNumber = ""
 	}
@@ -123,7 +126,7 @@ function addOperationToExpression() {
 	}
 	// currentExpressionArray.push(this.textContent)
 	currentExpressionLength = currentExpressionArray.length;
-	if (currentExpressionLength > 2) {
+	if (currentExpressionLength > 1) {
 		currentResult = operate()
 		// currentExpressionLength = 2;
 		currentExpressionArray = [currentResult, this.textContent, ""];
