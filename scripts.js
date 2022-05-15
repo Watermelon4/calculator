@@ -101,6 +101,7 @@ function clearCalculator() {
 	currentResult = "";
 	currentExpressionDisplay.textContent = currentExpression;
 	currentResultDisplay.textContent = currentResult;
+	currentExpressionLength = 0;
 }
 
 // for each button, when clicked add the button's text content to the current operation
